@@ -1,14 +1,29 @@
-name: Deploy a file on EC2
+name: Deploy a file on AWS
 on: workflow_dispatch
 jobs:
-  deploy:
-    name: Deploy to EC2 on master branch push
+  test:
+    name: Test the App on GitHub Runner
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
-
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Test code
+        run: npm test
+  deploy:
+      needs: test
+      name: Deploy App on EC2
+      runs-on: ubuntu-latest
+      
+      steps:
+      - name: Checkout the files
+        uses: actions/checkout@v2
       - name: Deploy to Server 1
         uses: easingthemes/ssh-deploy@main
         env:
@@ -16,3 +31,5 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
+      - name: Build
+        run: npm run dev
