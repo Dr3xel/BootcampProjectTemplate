@@ -1,5 +1,5 @@
 name: Deploy a file on EC2
-on: [push, workflow_dispatch]
+on: workflow_dispatch
 jobs:
   deploy:
     name: Deploy to EC2 on master branch push
