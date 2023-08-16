@@ -1,10 +1,10 @@
 name: Hello msg
-	on: workflow_dispatch
-	jobs:
-	  build:
+on: workflow_dispatch
+jobs:
+  build:
     environment: production
-	    runs-on: ubuntu-latest
-	    steps:
-	      - uses: actions/checkout@v2
-	      - name: Run a one-line script
-	        run: echo Hello, "{{ MY_NAME }}"!
+    runs-on: ubuntu-latest
+      steps:
+	- uses: actions/checkout@v2
+	- name: Run a one-line script
+	  run: echo Hello, "{{ MY_NAME }}"!
