@@ -39,7 +39,7 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_security_group" "security_terraform" {
    name = "security_terraform"
-   vpc_id = "vpc-03d9774797f85663b"
+   vpc_id = 
    description = "security group for terraform"
  
    ingress {
