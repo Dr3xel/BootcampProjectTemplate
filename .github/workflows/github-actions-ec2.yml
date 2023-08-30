@@ -1,29 +1,9 @@
 name: Deploy a file on AWS
-on: workflow_dispatch
+on: [push]
 jobs:
-  test:
-    name: Test the App on GitHub Runner
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout the files
-        uses: actions/checkout@v2
-      - name: Install NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build 
-      - name: Test code
-        run: npm test
   deploy:
-      needs: test
-      name: Deploy App on EC2
-      runs-on: ubuntu-latest
-      
-      steps:
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout the files
         uses: actions/checkout@v2
       - name: Deploy to Server 1

@@ -1,0 +1,17 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: "Update apt cache"
+      apt:
+        update_cache: yes
+
+    - name: "Installing Nginx Web Server"
+      package:
+        name: "nginx"
+        state: present
+    
+    - name: "Start Nginx"
+      service:
+        name: nginx
+        state: start
+        enabled: yes
